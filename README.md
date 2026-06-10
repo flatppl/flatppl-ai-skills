@@ -1,22 +1,22 @@
 # FlatPPL AI Skills
 
-Drop-in knowledge that teaches AI coding agents how to **write**, **explain**,
-**troubleshoot**, and **answer questions about**
+Skills that teach AI coding agents to **write**, **explain**, **troubleshoot**, and
+**answer questions about**
 [FlatPPL](https://flatppl.github.io/flatppl-design/flatppl-design.md) — a flat,
-loop-free, vectorized probabilistic language — without re-reading the whole design spec
-every session.
+loop-free, vectorized probabilistic language — without re-reading the entire design
+specification each session.
 
-Two skills, no install footprint beyond markdown:
+The repository provides two skills:
 
 | Skill | Task |
 |---|---|
 | **flatppl-query** | Read-only: answer questions about the language (syntax, value types, measure algebra, distributions, functions, likelihoods/posteriors, FlatPIR, profiles) **and explain what a given `.flatppl` model does**. |
 | **flatppl-model** | Write, draft, port (Stan/PyMC/Turing), review, fix, or **troubleshoot** a `.flatppl` model. |
 
-Both ground everything in the single public spec document
-`https://flatppl.github.io/flatppl-design/flatppl-design.md` — no repo checkout, no
-filesystem layout, no local docs required. The agent fetches the spec on demand and
-cites section headings.
+Both ground every claim in a single public specification document
+(`https://flatppl.github.io/flatppl-design/flatppl-design.md`); no repository checkout,
+filesystem layout, or local documentation is required. The agent fetches the
+specification on demand and cites section headings.
 
 ## Install
 
@@ -30,10 +30,10 @@ plugin (which bundles both skills):
 /plugin install flatppl@flatppl-ai-skills
 ```
 
-Enabled on install, across all your projects. The footprint is small: only each skill's
-one-line description is always loaded; the full guidance and the spec/diagnostics
-references load on demand when a FlatPPL task fires. Updates flow through
-`/plugin marketplace update`.
+It is enabled on installation and available in every project. The footprint is minimal:
+only each skill's one-line description is always loaded, while the full guidance and the
+specification and diagnostics references load on demand when a FlatPPL task fires. Run
+`/plugin marketplace update` to receive updates.
 
 ### Claude Code — copy install
 
@@ -57,8 +57,9 @@ dist/flatppl-query.skill
 dist/flatppl-model.skill
 ```
 
-(Rebuild after editing a skill: `zip -r dist/flatppl-query.skill flatppl-query`
-from inside `.claude/skills/`, or use skill-creator's `package_skill`.)
+To rebuild a bundle after editing a skill, run
+`zip -r dist/flatppl-query.skill flatppl-query` from inside `.claude/skills/`, or use
+skill-creator's `package_skill`.
 
 ### Other agents
 

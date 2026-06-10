@@ -22,10 +22,10 @@ use `flatppl-model` instead.
 
 ## How to read the spec: download once, then grep
 
-The spec is one document of ~40k words. **Strongly prefer downloading it once to a
-session-local file and reading it with `grep`/`Read`** — you get exact verbatim text,
-the whole document with no truncation, and free instant repeat lookups. This beats
-fetching per-topic on every axis that matters (fidelity, completeness, cost).
+The specification is a single document of roughly 40,000 words. **Strongly prefer
+downloading it once to a session-local file and reading it with `grep`/`Read`**: this
+yields exact verbatim text across the whole document with no truncation, plus fast repeat
+lookups. It is preferable to per-topic fetching for fidelity, completeness, and cost.
 
 1. **Download once — the file is your cache.** Run, guarded on existence so a whole
    session downloads at most once:

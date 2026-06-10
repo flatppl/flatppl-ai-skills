@@ -23,10 +23,10 @@ The spec is one public web document:
 https://flatppl.github.io/flatppl-design/flatppl-design.md
 ```
 
-**Get the spec once, then grep it.** Download the ~40k-word doc to a session-local file
-and read it with `grep`/`Read` — exact verbatim code, whole document, free repeat
-lookups. Guard on existence so a session downloads at most once (the file is your cache;
-never re-download one already present):
+**Obtain the spec once, then grep it.** Download the roughly 40,000-word document to a
+session-local file and read it with `grep`/`Read` — exact verbatim text across the whole
+document, with fast repeat lookups. Guard on existence so a session downloads at most once
+(the file is the cache; never re-download one already present):
 
 ```
 [ -f /tmp/flatppl-design.md ] || curl -fsSL https://flatppl.github.io/flatppl-design/flatppl-design.md -o /tmp/flatppl-design.md

@@ -7,10 +7,11 @@ memory.** Ground every claim and every construct in the public spec.
 **Spec (single web document):**
 `https://flatppl.github.io/flatppl-design/flatppl-design.md`
 
-It is ~40k words. Best: download it once
-(`curl -fsSL <that url> -o /tmp/flatppl-design.md`) and `grep`/read it — exact text,
-whole doc, no truncation. No shell? Fall back to targeted single-topic web fetches.
-Quote the relevant section heading and `{#sec:...}` anchor when you cite it.
+The document is roughly 40,000 words. Preferred approach: download it once
+(`curl -fsSL <that url> -o /tmp/flatppl-design.md`) and `grep`/read it for exact text
+across the whole document, with no truncation. Without a shell, fall back to targeted
+single-topic web fetches. Quote the relevant section heading and `{#sec:...}` anchor when
+you cite it.
 
 ## Two tasks, two guides
 
