@@ -1,7 +1,7 @@
 # FlatPPL — Copilot instructions
 
 This project uses **FlatPPL**, a flat, loop-free, vectorized probabilistic language.
-It is niche and unlikely to be in your training set — **do not answer from memory.**
+It is new and not yet in your training set — **do not answer from memory.**
 
 Spec (one web document, ~40k words):
 `https://flatppl.github.io/flatppl-design/flatppl-design.md`

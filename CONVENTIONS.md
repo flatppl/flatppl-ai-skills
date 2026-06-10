@@ -1,7 +1,7 @@
 # FlatPPL conventions (Aider et al.)
 
 This project uses **FlatPPL**, a flat, loop-free, vectorized probabilistic language.
-Niche and unlikely to be in your training set — **do not answer from memory.** Ground
+New and not yet in your training set — **do not answer from memory.** Ground
 every construct in the spec.
 
 Spec (one web document, ~40k words):

@@ -12,7 +12,7 @@ document:
 https://flatppl.github.io/flatppl-design/flatppl-design.md
 ```
 
-FlatPPL is niche and **not in your training set**; your priors about it are likely
+FlatPPL is new and **not in your training set**; your priors about it are likely
 wrong, so answer from the spec, never from memory.
 
 This skill is **read-only**: it explains the language, answers whether FlatPPL supports

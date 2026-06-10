@@ -1,7 +1,7 @@
 # FlatPPL — Gemini guide
 
 This project uses **FlatPPL**, a flat, loop-free, vectorized probabilistic language.
-It is niche and unlikely to be in your training set — **do not answer from memory.**
+It is new and not yet in your training set — **do not answer from memory.**
 Ground every claim and every construct in the public spec.
 
 Spec (one web document, ~40k words):

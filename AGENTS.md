@@ -1,7 +1,7 @@
 # FlatPPL — agent guide
 
 This project uses **FlatPPL**, a flat, loop-free, vectorized probabilistic language.
-FlatPPL is niche and unlikely to be in your training set — **do not answer from
+FlatPPL is new and not yet in your training set — **do not answer from
 memory.** Ground every claim and every construct in the public spec.
 
 **Spec (single web document):**

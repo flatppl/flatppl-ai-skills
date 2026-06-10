@@ -1,9 +1,10 @@
 # FlatPPL AI Skills
 
-Drop-in knowledge that teaches AI coding agents how to **write** and **answer
-questions about** [FlatPPL](https://flatppl.github.io/flatppl-design/flatppl-design.md)
-— a flat, loop-free, vectorized probabilistic language — without re-reading the whole
-design spec every session.
+Drop-in knowledge that teaches AI coding agents how to **write**, **explain**,
+**troubleshoot**, and **answer questions about**
+[FlatPPL](https://flatppl.github.io/flatppl-design/flatppl-design.md) — a flat,
+loop-free, vectorized probabilistic language — without re-reading the whole design spec
+every session.
 
 Two skills, no install footprint beyond markdown:
 
@@ -77,7 +78,7 @@ The Cursor and Gemini stubs `@`/path-reference the `SKILL.md` files, so copy
 
 ## How it works
 
-FlatPPL is niche and not in model training sets, so both skills enforce one
+FlatPPL is novel and not in model training sets, so both skills enforce one
 discipline: **never answer from memory — fetch the spec, quote it, cite the section
 heading.** flatppl-model adds the hard invariants (no loops/`if`, vectorize, `~` vs
 `=`, support constraints, the `lawof`/`kernelof`/`likelihoodof`/`bayesupdate`/`restrict`

@@ -5,7 +5,7 @@ description: Write, port, review, fix, or troubleshoot FlatPPL probabilistic mod
 
 # Writing, reviewing, and fixing FlatPPL models
 
-FlatPPL is a **flat, loop-free, vectorized** probabilistic language. It is niche and
+FlatPPL is a **flat, loop-free, vectorized** probabilistic language. It is new and
 **not in your training set**; your priors about its syntax are likely wrong. The one
 rule that prevents most errors: **copy the shape of a worked example, and verify every
 construct against the spec — never write from memory.**
