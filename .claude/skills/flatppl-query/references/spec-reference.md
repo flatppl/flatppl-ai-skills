@@ -9,6 +9,41 @@ so the spec — not memory, not this file — is the source of truth.
 
 `grep -n '{#sec:' /tmp/flatppl-design.md` lists every section anchor with its line.
 
+## Basic syntax
+
+Surface syntax of FlatPPL (section "Syntax" `{#sec:syntax}`; grep there for the formal
+grammar and full detail). The language is deliberately lean.
+
+- **Statements** — one per line, or separated by `;`. A module is a sequence of bindings.
+- **Bindings** — `name = expr` is deterministic; `name ~ expr` is a stochastic node,
+  exactly `name = draw(expr)`. Positional decomposition: `a, b, c = expr` / `a, b ~ expr`,
+  `x, y = some_record`, `value, _ = rand(...)`.
+- **Comments** — `#` starts a plain line comment; `### … ###` is a plain block comment
+  (both discarded). **Doc-comments** attach to the following binding and survive into
+  FlatPIR: `% text` (single line) and `%%% … %%%` (block), with an optional markup tag
+  `%md` (default, Markdown + `$…$` math) or `%typ` (Typst).
+- **Literals** — numbers (`3.14`, `42`, `0xF7`, `1_000_000`, `1.45e7`), strings (`"foo"`),
+  booleans (`true` / `false`), arrays (`[1, 2, 3]`), records (`record(a = 1, b = 2)`),
+  tuples (`(a, b)`).
+- **Operators** — infix `+ - * / ^` and unary `-`; comparisons `< > == != <= >=` and `in`
+  (set membership), chainable (`a < b <= c`); logical `&& || !`. `^` is right-associative.
+  No implicit broadcasting: plain `+` / `-` require matching shapes, `*` is matrix/vector
+  multiplication, and `/` and `^` are scalar-only.
+- **Broadcasting** — dot forms desugar to `broadcast`: dot-call `f.(x)`, dotted binary
+  `a .+ b`, dotted unary `.- x`. (`in` has no dotted form.)
+- **Lambdas** — `arg -> expr` or `(a, b) -> expr` (sugar for `functionof`); a single
+  argument takes no parentheses, at least one argument is required, and the body extends as
+  far right as possible.
+- **Indexing** — 1-based. `A[i]`, `A[i, j]`, field access `r.field`; `A[:, j]` selects a
+  whole axis (lowers to `get(A, all, j)`); `A[!, j]` extracts the sole element of a
+  length-1 axis.
+- **Aggregation** — `C[.i, .k] := expr` is sum-`aggregate` over axis names `.i`, `.k`; the
+  metric form `g: C[.mu^, .nu_] := expr` is `metricsum`.
+- **Excluded** — no type annotations, no loops or `if`/`else` (use `ifelse`), no
+  function-definition blocks (use `functionof`).
+- **Special operations** (their own syntax, not ordinary calls): `elementof`, `valueset`,
+  `draw`, `lawof`, `functionof`, `kernelof`, `fn`, `load_module`.
+
 ## Section index
 
 | Section | Topic |
