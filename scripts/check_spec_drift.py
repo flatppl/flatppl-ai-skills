@@ -2,14 +2,26 @@
 """Detect drift between the live FlatPPL spec and references/spec-reference.md.
 
 The spec-reference is a recall aid; the published specification is authoritative. As the
-spec evolves (most often by gaining distributions), the bundled index can fall behind
-silently. This script fetches the spec and compares its built-in distribution roster
-against the names listed in spec-reference.md, exiting nonzero on any difference so the
-scheduled CI run flags it for a human to reconcile.
+spec evolves, the bundled construct index can fall behind silently. This script fetches
+the spec and checks the reference's enumerated construct lists against it, exiting nonzero
+on drift so the scheduled CI run flags it for a human to reconcile.
 
-Distributions are checked because they are a clean, enumerable, frequently-extended list.
-Other categories (functions, measure operators) are organized by category in the spec and
-are intentionally listed non-exhaustively in the reference, so they are not drift-checked.
+Two kinds of check, by what each list affords:
+
+- Distributions are a self-contained, cleanly enumerable roster, so they are checked
+  *bidirectionally* within the spec's distributions section: a name the spec added but the
+  reference lacks, or one the reference carries that the spec dropped, both count as drift.
+
+- Measure operators, predefined value sets, and standard modules are enumerated in the
+  reference but are scattered through the spec's prose (and often written with arguments,
+  e.g. `truncate(...)`), so a bidirectional check would be noisy. They are checked by
+  *presence*: every name the reference lists must still appear in the spec. This catches
+  the harmful case — the reference naming a construct that was renamed or removed — without
+  false positives. New names the spec adds are not flagged here (an incomplete index still
+  routes correctly; a wrong one misleads).
+
+Functions are organized by category in the spec and listed non-exhaustively in the
+reference by design, so they are not checked.
 """
 import re
 import sys
@@ -29,13 +41,14 @@ def fetch(url: str) -> str:
         return resp.read().decode("utf-8", "replace")
 
 
-def backticked_caps(text: str) -> set[str]:
-    """Backtick-wrapped capitalized identifiers, e.g. `Normal`, `StudentT`."""
-    return set(re.findall(r"`([A-Z][A-Za-z0-9]+)`", text))
+def ref_block(ref: str, label: str) -> str:
+    """The text of a '**Label**' block in the reference, up to the next '**' line."""
+    m = re.search(r"\*\*" + re.escape(label) + r"\*\*(.*?)(?=\n\*\*|\Z)", ref, re.S)
+    return m.group(1) if m else ""
 
 
 def spec_distributions(spec: str) -> set[str]:
-    """Names within the spec's distributions section (its anchor to the next anchor)."""
+    """Capitalized backticked names within the spec's distributions section."""
     start = re.search(r"\{#sec:distributions\}", spec)
     if not start:
         print("ERROR: could not locate {#sec:distributions} in the spec.", file=sys.stderr)
@@ -43,41 +56,61 @@ def spec_distributions(spec: str) -> set[str]:
     rest = spec[start.end():]
     nxt = re.search(r"\{#sec:", rest)
     section = rest[: nxt.start()] if nxt else rest
-    return backticked_caps(section)
+    return set(re.findall(r"`([A-Z][A-Za-z0-9]+)`", section))
 
 
-def reference_distributions(ref: str) -> set[str]:
-    """Names in the reference's '**Distributions**' block."""
-    m = re.search(r"\*\*Distributions\*\*(.*?)(?=\n\*\*|\Z)", ref, re.S)
-    return backticked_caps(m.group(1)) if m else set()
+def present_in_spec(name: str, spec: str) -> bool:
+    """True if `name` appears as a backticked token, bare or with arguments."""
+    return re.search(r"`" + re.escape(name) + r"[`(]", spec) is not None
+
+
+# (reference label, regex for the names in that block) for the presence-checked lists.
+PRESENCE_LISTS = [
+    ("Measure algebra & posteriors", r"`([a-z][a-z0-9]+)`"),       # lawof, truncate, …
+    ("Value sets & parameter domains", r"`([a-z][a-z0-9]+)`"),     # reals, nonnegreals, …
+    ("Standard modules", r"`([a-z][a-z]+(?:-[a-z]+)*)`"),          # particle-physics, …
+]
 
 
 def main() -> None:
     spec = fetch(SPEC_URL)
-    spec_names = spec_distributions(spec)
-    if not spec_names:
+    spec_dists = spec_distributions(spec)
+    if not spec_dists:
         print("ERROR: extracted no distribution names from the spec.", file=sys.stderr)
         sys.exit(2)
 
     drifted = False
     for ref_path in REFERENCES:
-        ref_names = reference_distributions(ref_path.read_text())
-        missing = spec_names - ref_names   # in spec, absent from reference
-        extra = ref_names - spec_names     # in reference, absent from spec
+        ref = ref_path.read_text()
         rel = ref_path.relative_to(ROOT)
+
+        # Distributions — bidirectional.
+        ref_dists = set(re.findall(r"`([A-Z][A-Za-z0-9]+)`", ref_block(ref, "Distributions")))
+        missing = spec_dists - ref_dists
+        extra = ref_dists - spec_dists
         if missing or extra:
             drifted = True
-            print(f"DRIFT in {rel}:")
+            print(f"DRIFT {rel} [distributions]:")
             if missing:
                 print(f"  spec has, reference lacks: {', '.join(sorted(missing))}")
             if extra:
                 print(f"  reference has, spec lacks: {', '.join(sorted(extra))}")
         else:
-            print(f"OK {rel}: {len(ref_names)} distributions match the spec.")
+            print(f"OK {rel} [distributions]: {len(ref_dists)} match.")
+
+        # Measure ops, value sets, standard modules — presence (reference ⊆ spec).
+        for label, pattern in PRESENCE_LISTS:
+            names = set(re.findall(pattern, ref_block(ref, label)))
+            absent = sorted(n for n in names if not present_in_spec(n, spec))
+            if absent:
+                drifted = True
+                print(f"DRIFT {rel} [{label}]: not found in spec: {', '.join(absent)}")
+            else:
+                print(f"OK {rel} [{label}]: {len(names)} present in spec.")
 
     if drifted:
         print("\nspec-reference.md is out of date with the spec. Reconcile the construct "
-              "index (and the .skill bundles via 'pixi run build').")
+              "index, then rebuild the bundles with 'pixi run build'.")
         sys.exit(1)
 
 
