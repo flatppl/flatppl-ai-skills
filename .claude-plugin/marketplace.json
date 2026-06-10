@@ -1,0 +1,12 @@
+{
+  "name": "flatppl-ai-skills",
+  "description": "FlatPPL agent skills — teach AI coding agents to write and answer questions about the FlatPPL probabilistic language.",
+  "owner": { "name": "FlatPPL" },
+  "plugins": [
+    {
+      "name": "flatppl",
+      "source": "./",
+      "description": "Write FlatPPL models and answer questions about the language, grounded in the public FlatPPL design spec. Bundles the flatppl-query and flatppl-model skills."
+    }
+  ]
+}
