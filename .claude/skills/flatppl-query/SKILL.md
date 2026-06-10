@@ -22,10 +22,10 @@ use `flatppl-model` instead.
 
 ## How to read the spec: download once, then grep
 
-The spec is one document of ~40k words. **Strongly prefer downloading it once to a
-session-local file and reading it with `grep`/`Read`** — you get exact verbatim text,
-the whole document with no truncation, and free instant repeat lookups. This beats
-fetching per-topic on every axis that matters (fidelity, completeness, cost).
+The specification is a single document of roughly 40,000 words. **Strongly prefer
+downloading it once to a session-local file and reading it with `grep`/`Read`**: this
+yields exact verbatim text across the whole document with no truncation, plus fast repeat
+lookups. It is preferable to per-topic fetching for fidelity, completeness, and cost.
 
 1. **Download once — the file is your cache.** Run, guarded on existence so a whole
    session downloads at most once:
@@ -73,39 +73,11 @@ don't edit it. Read top to bottom and explain in plain terms:
 Stay read-only. If the user then wants the model written, changed, fixed, or its validity
 checked, that is `flatppl-model`.
 
-## Common indirect questions → where to look
-- "for-loop / iterate over data / map over points" → FlatPPL is loop-free; see
-  broadcasting & reductions in "Language design", excluded constructs in "Syntax".
-- "if / else / conditional / branching" → no control flow; `ifelse` and logic in
-  "Functions and deterministic operations", excluded constructs in "Syntax".
-- "constrain a parameter's domain / restrict a value to a set" → `elementof` /
-  `external` in "Language design"; the set catalogue in "Value types and data model".
-- "truncate / restrict support / half-normal / normalize a sub-measure" →
-  `truncate`, support restriction & `normalize` in "Measure algebra" (the same sets
-  from "Value types and data model" serve as truncation regions).
-- "condition on data / posterior / Bayes update" → "Likelihoods and posteriors".
-- "serialize / binary format / wire format" → textual FlatPIR S-expressions in
-  "Intermediate representation"; JSON-based interop in "Profiles and interoperability".
+## Spec reference (load on demand)
 
-## Section index
-
-Top-level sections of `flatppl-design.md` (anchors follow the `{#sec:...}` pattern —
-`grep -n '{#sec:'` lists them with line numbers; capture the exact anchor when citing).
-
-| Section | Topic |
-|---|---|
-| Context and motivation | Why FlatPPL exists, goals |
-| Language overview | Nutshell, targets, first example, core concepts, tour |
-| Value types and data model | Scalars, constants, arrays, records, presets, tables, sets |
-| Language design | Names/modules, binding, calling conventions, tuples, variates & measures, `elementof`/`external` (param domains), phases, reification, composition, holes, broadcasting, reductions, einsum, standard/composed modules, versioning, doc comments |
-| Measure algebra | Foundations, measure monad, measure algebra, `truncate`/support restriction, `normalize`, `pushfwd` |
-| Functions and deterministic operations | Array/table ops, access, convolution, elementary fns, operators, predicates, linalg, reductions, norms, logic/conditionals, membership/filtering/binning, random gen, measure-kernel primitives |
-| Distributions | Univariate continuous/discrete, multivariate, composite |
-| Likelihoods and posteriors | Likelihoods, conditioning, Bayes update, posteriors |
-| Random value generation | Sampling, draws |
-| Syntax | Statements, comments, supported/excluded constructs, indexing/slicing, broadcasting, lambdas, axis names, host embedding, formal grammar |
-| Intermediate representation | FlatPIR: naming, module structure, doc forms, type/phase annotations, expressions, cross-module inference |
-| Profiles and interoperability | Exchange platform, target profiles, HS³/RooFit, Stan |
-| Standard modules | `particle-physics`, `generalized-linear-models`, `ext-linear-algebra`, `special-functions`, `polynomials`, `distances` |
-| Worked examples | End-to-end model examples |
-| Implementation notes | Known/planned implementations |
+The full section index, the indirect-question routing map, and a construct index — what
+distributions, sets, functions, and measure operators exist, and where to grep for their
+signatures — live in [`references/spec-reference.md`](references/spec-reference.md). Read
+it **only when** you need to route to a section or recall what a construct is; it is not
+loaded by default, so it costs nothing until you open it. The downloaded spec is still the
+source of truth — confirm signatures there.

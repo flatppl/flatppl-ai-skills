@@ -3,10 +3,11 @@
 This project uses **FlatPPL**, a flat, loop-free, vectorized probabilistic language.
 It is new and not yet in your training set — **do not answer from memory.**
 
-Spec (one web document, ~40k words):
+Specification (one web document, roughly 40,000 words):
 `https://flatppl.github.io/flatppl-design/flatppl-design.md`
-Best: download once (`curl -fsSL <that url> -o /tmp/flatppl-design.md`) and `grep` it —
-exact text, whole doc, no truncation. No shell? Fetch one topic at a time instead.
+Preferred: download it once (`curl -fsSL <that url> -o /tmp/flatppl-design.md`) and
+`grep` it for exact text across the whole document. Without a shell, fetch one topic at a
+time instead.
 
 Core rules:
 - No loops, no `if`/`else`, no control flow. Vectorize with broadcasting (`.+`, `f.(x)`),

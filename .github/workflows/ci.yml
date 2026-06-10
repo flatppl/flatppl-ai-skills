@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.3
+
+      - name: Install pixi
+        uses: prefix-dev/setup-pixi@v0.9.6
+
+      # Structural validation: both manifests parse as JSON and carry their required
+      # fields, plugin sources and the skills directory resolve, and every SKILL.md has
+      # frontmatter whose name matches its directory.
+      - name: Lint manifests and skills
+        run: pixi run lint
+
+      # The dist/*.skill bundles are committed. Rebuild them deterministically and fail
+      # if they differ from what is checked in, so a SKILL.md edit can't ship with a
+      # stale bundle.
+      - name: Verify bundles are up to date
+        run: |
+          pixi run build
+          if ! git diff --quiet -- dist/; then
+            echo "dist/*.skill is out of date. Run 'pixi run build' and commit the result."
+            git --no-pager diff --stat -- dist/
+            exit 1
+          fi
