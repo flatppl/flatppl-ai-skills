@@ -9,3 +9,4 @@ python = ">=3.10"
 lint = "python scripts/lint_skills.py"
 build = "python scripts/build_skills.py"
 check = { depends-on = ["lint", "build"] }
+check-drift = "python scripts/check_spec_drift.py"
