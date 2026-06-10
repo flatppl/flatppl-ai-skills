@@ -36,7 +36,7 @@ section is enough to work safely.
   syntax — token names below are illustrative shape, not a guarantee of current spelling.
 - **No loops, no `if`/`else`, no control flow.** Vectorize: broadcasting (`.+`, `f.(x)`),
   reductions, `iid(dist, n)`, `ifelse(cond, a, b)` for piecewise.
-- `~` for random variables, `=` for deterministic transforms. `%` for line comments.
+- `~` for random variables, `=` for deterministic transforms. `#` for plain comments, `%` / `%%%` for doc-comments.
 - **Constrain support** with `elementof(...)` (typed domain) or `truncate(...)`; wrap in
   `normalize(...)` for a proper prior.
 - **Assemble posteriors** with the measure pipeline: `lawof` / `kernelof` /

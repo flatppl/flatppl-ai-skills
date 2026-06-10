@@ -75,8 +75,10 @@ questions, or to **explain what an existing model does** (read-only), use
   `tau ~ normalize(truncate(Cauchy(0,5), interval(0, inf)))`.
 - **Build reusable functions with `functionof`.** `f = functionof(b)` then `f(x)` —
   when a plain builtin isn't enough.
-- **Comments:** `%` for a line comment; lead non-trivial files with a `%%% … %%%`
-  doc fence (markdown + LaTeX), the block-doc-comment form in "Syntax" → Documentation.
+- **Comments:** `#` is a plain line comment (`### … ###` block); `%` and `%%% … %%%` are
+  doc-comments that attach to the following binding and survive into FlatPIR. Lead
+  non-trivial files with a `%%% … %%%` doc fence (markdown + LaTeX) — the block-doc-comment
+  form in "Syntax" → Documentation.
 
 ## The measure pipeline (idiom)
 

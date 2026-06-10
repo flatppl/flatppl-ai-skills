@@ -12,7 +12,7 @@ time instead.
 Core rules:
 - No loops, no `if`/`else`, no control flow. Vectorize with broadcasting (`.+`, `f.(x)`),
   reductions, `iid(dist, n)`, and `ifelse(cond, a, b)`.
-- `~` for random variables, `=` for deterministic transforms. `%` for comments.
+- `~` for random variables, `=` for deterministic transforms. `#` for plain comments, `%` / `%%%` for doc-comments.
 - Constrain support via `elementof(...)` or `truncate(...)` (wrap in `normalize(...)`
   for a proper prior).
 - Assemble posteriors with the measure pipeline: `lawof` / `kernelof` / `likelihoodof`
