@@ -48,12 +48,12 @@ questions, or to **explain what an existing model does** (read-only), use
    Copy their shape; don't assume a specific example (e.g. "eight-schools") exists —
    read whichever models the section actually contains.
 2. **Check any construct you're unsure of** against the spec (`grep` the local file, or
-   via `flatppl-query`), don't guess: syntax → "Syntax"; deterministic ops → "Functions and deterministic
-   operations"; distributions → "Distributions"; measure ops → "Measure algebra";
-   conditioning/posteriors → "Likelihoods and posteriors"; standard-library builtins →
-   "Standard modules". A function absent from "Functions" may still be a valid
-   standard-module builtin — check both before rejecting it. If the spec doesn't cover
-   it, say so — don't invent.
+   via `flatppl-query`) — don't guess. For which section a construct lives in and a
+   name-level index of what exists (distributions, sets, functions, measure operators),
+   see [`references/spec-reference.md`](references/spec-reference.md), loaded on demand. A
+   function absent from "Functions and deterministic operations" may still be a valid
+   standard-module builtin — check both before rejecting it. If the spec doesn't cover it,
+   say so — don't invent.
 3. **Write the model** following the idiom below.
 4. **Review against the invariants** before declaring done. Quote the spec section or
    example you relied on for any non-obvious choice.
@@ -131,7 +131,9 @@ flag any unjustified `joint`/`jointchain`/`kchain`/`pushfwd`/`weighted` in the b
 ## Troubleshooting a model
 
 When a model errors, fails to assemble, or produces wrong/suspect output, **diagnose
-before editing**:
+before editing**. A symptom → likely-cause → spec-section catalog is in
+[`references/diagnostics.md`](references/diagnostics.md) (load on demand) — consult it when
+a failure doesn't obviously map to a Hard invariant. The method:
 
 1. **Reproduce the exact failure.** Quote the error verbatim, or state precisely what the
    output should be versus what it is. Don't work from a paraphrase.

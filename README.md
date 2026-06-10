@@ -30,8 +30,10 @@ plugin (which bundles both skills):
 /plugin install flatppl@flatppl-ai-skills
 ```
 
-Updates flow through `/plugin marketplace update`. The plugin is enabled across all your
-projects.
+Enabled on install, across all your projects. The footprint is small: only each skill's
+one-line description is always loaded; the full guidance and the spec/diagnostics
+references load on demand when a FlatPPL task fires. Updates flow through
+`/plugin marketplace update`.
 
 ### Claude Code — copy install
 
