@@ -121,6 +121,39 @@ names and behavior in "Measure algebra" / "Likelihoods and posteriors" if unsure
 - Inline data literals; keep a `_data` suffix for observed values (`y_data`) so the
   model variable (`y`) stays the modeled variate.
 
+## Gaining confidence without an engine
+
+There is **no FlatPPL engine** to run a model through today, so you cannot execute it and
+see output. Spec-grounding proves a model has no spec *violations*; it does **not** prove
+it computes the density you intended — parameterization and shape errors live in that gap.
+Before declaring a model done (writing) or sound (reviewing), climb this ladder; do the
+cheap rungs always, reach for the oracle when the model is non-trivial:
+
+1. **Generative dry-run** — read top-to-bottom as a sampler; every `~` RHS must be a
+   drawable probability measure (an unnormalized `truncate`/`weighted`/sub-measure is not).
+2. **Shape ledger** — variate shape must equal observed-data shape at each likelihood;
+   FlatPPL inserts **no** implicit IID product (scalar variate + length-N data ⇒ `iid`).
+3. **Support audit** — proper prior over the declared domain; truncations `normalize`d.
+4. **Parameterization round-trip** — write the density you *intend* beside the one the
+   FlatPPL call *denotes* (`08-distributions.md` arg names) and confirm they're the same
+   function. Catches sd-vs-variance, rate-vs-scale, df-only-vs-location-scale.
+5. **Independent numerical oracle** — on a 3–5 point dataset, compute the intended
+   (log-)density/posterior by a route that doesn't touch FlatPPL. Prefer **closed-form by
+   hand** (conjugacy) — needs no tools. If a trusted numerical stack is **already present**,
+   reimplement the density there and evaluate at a point or two. If none is present and a
+   numerical check would materially help, **ask the user first**, then spin up an *isolated
+   throwaway* env (**prefer `pixi`, else `uv`, else stdlib `venv` — always in a temp dir**),
+   install the minimum quietly, run a tiny check, and **delete it (leave no trace) once they
+   confirm their question is answered**. Never install silently or assume a
+   stack — and **NEVER install into a global / system / existing environment; installs go
+   only into a fresh isolated venv you delete after. If you can't isolate, don't install.**
+   The only rung that gives *positive* numerical evidence. Keep it light. Opt-in venv
+   protocol: [`references/confidence-without-an-engine.md`](references/confidence-without-an-engine.md).
+
+State which rungs you climbed — "4-point SciPy oracle matched" is evidence; "looks right"
+is not. A clean parse proves syntax only, never correctness. Full ladder, oracle recipes,
+and the parameterization trap list: [`references/confidence-without-an-engine.md`](references/confidence-without-an-engine.md).
+
 ## Reviewing a model
 
 Walk the **Hard invariants** (no excluded constructs; `~` vs `=`; support constrained
