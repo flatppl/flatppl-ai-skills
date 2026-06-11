@@ -142,9 +142,10 @@ cheap rungs always, reach for the oracle when the model is non-trivial:
    hand** (conjugacy) — needs no tools. If a trusted numerical stack is **already present**,
    reimplement the density there and evaluate at a point or two. If none is present and a
    numerical check would materially help, **ask the user first**, then spin up an *isolated
-   throwaway* env (**prefer `pixi`, else `uv`, else stdlib `venv` — always in a temp dir**),
-   install the minimum quietly, run a tiny check, and **delete it (leave no trace) once they
-   confirm their question is answered**. Never install silently or assume a
+   throwaway* env **in a temp dir** (stdlib `venv` works anywhere Python does and assumes
+   nothing — reach for `uv`/`pixi` only if the user already has them), install the minimum
+   quietly, run a tiny check, and **delete it (leave no trace) once they confirm their
+   question is answered**. Never install silently or assume a
    stack — and **NEVER install into a global / system / existing environment; installs go
    only into a fresh isolated venv you delete after. If you can't isolate, don't install.**
    The only rung that gives *positive* numerical evidence. Keep it light. Opt-in venv

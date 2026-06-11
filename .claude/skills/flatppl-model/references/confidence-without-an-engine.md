@@ -96,29 +96,30 @@ route that **does not involve FlatPPL**. In order of preference:
      `scipy` only for a distribution's `logpdf`); keep output quiet (`-q`) and **do not
      paste install logs into the conversation** — report only the oracle's numeric result.
 
-     **Prefer the tool the user already has, in this order: `pixi` → `uv` → stdlib `venv`**
-     (pixi and uv resolve faster and cache better; venv is the universal fallback). In every
+     **Assume nothing about the user's setup: default to stdlib `venv`** — it ships with
+     Python, so it works anywhere Python does. Reach for `uv` or `pixi` instead **only if
+     the user already has them** (faster resolve/cache; no reason to expect them). In every
      case the env lives **inside `$SCRATCH`** so one `rm -rf` removes it. Always invoke the
      env's own `python`/`pip` (never a bare `pip install`, which could hit a global env):
      ```sh
      SCRATCH=$(mktemp -d)
 
-     # pixi (first choice if available) — project + env both inside $SCRATCH
-     pixi init -q "$SCRATCH" && (cd "$SCRATCH" && pixi add -q numpy scipy \
-       && pixi run -q python oracle.py)
-
-     # uv (second choice) — venv inside $SCRATCH, uv's own pip
-     uv venv -q "$SCRATCH/venv" && uv pip install -q --python "$SCRATCH/venv/bin/python" \
-       numpy scipy && "$SCRATCH/venv/bin/python" "$SCRATCH/oracle.py"
-
-     # stdlib venv (universal fallback)
+     # stdlib venv — the default; assumes only Python
      python3 -m venv "$SCRATCH/venv" \
        && "$SCRATCH/venv/bin/pip" install -q numpy scipy \
        && "$SCRATCH/venv/bin/python" "$SCRATCH/oracle.py"
+
+     # uv (only if the user already has it) — venv inside $SCRATCH, uv's own pip
+     uv venv -q "$SCRATCH/venv" && uv pip install -q --python "$SCRATCH/venv/bin/python" \
+       numpy scipy && "$SCRATCH/venv/bin/python" "$SCRATCH/oracle.py"
+
+     # pixi (only if the user already has it) — project + env both inside $SCRATCH
+     pixi init -q "$SCRATCH" && (cd "$SCRATCH" && pixi add -q numpy scipy \
+       && pixi run -q python oracle.py)
      ```
-     (Use **one** of the three — whichever tool is present. pixi/uv keep their package
-     downloads in their own global cache, which is harmless and not the user's env; the
-     *environment* itself stays in `$SCRATCH`.)
+     (Use **one** of the three — the stdlib `venv` unless the user already has uv/pixi. uv
+     and pixi keep their package downloads in their own global cache, which is harmless and
+     not the user's env; the *environment* itself stays in `$SCRATCH`.)
   3. **Confirm, then tear down.** When the result is in and the user's question looks
      answered, **prompt** them: *"Did that resolve it? I'll remove the venv."* On
      confirmation, delete the whole scratch dir so nothing is left behind:
