@@ -50,15 +50,21 @@ lookups. It is preferable to per-topic fetching for fidelity, completeness, and 
 because a plausible-sounding answer that wasn't pulled from the file is the main failure
 mode here:
 - **Anchors come from grep, never from memory.** Only cite a `{#sec:...}` anchor you have
-  actually seen in `grep -n '{#sec:' /tmp/flatppl-design.md` output. If you did not grep
-  it, you do not have it — do not write it. A made-up anchor that *looks* right (e.g.
-  inventing `{#sec:negbinomial2}` for a distribution) is a fabrication.
+  actually seen in `grep -n '{#sec:' /tmp/flatppl-design.md` output. **Back-check every
+  anchor before you emit it:** run `grep -c '{#sec:THE-ANCHOR}' /tmp/flatppl-design.md`; a
+  count of `0` means you invented it — delete it. Section anchors are `{#sec:name}`;
+  individual constructs (distributions, operators) use the inline form `{#name}` (e.g.
+  `{#negbinomial2}`, not `{#sec:negbinomial2}`) — never manufacture a `{#sec:}` for a
+  construct, or any plausible-sounding anchor (e.g. `{#sec:likelihoods-and-posteriors}`)
+  you did not grep.
 - **Quotes are verbatim.** Copy the spec sentence out of the file; never paraphrase into
   quotation marks.
-- **Never present FlatPPL code you did not copy from the spec as grounded.** If you must
-  show illustrative syntax, label it "illustrative — not quoted from the spec." An example
-  that sounds right but isn't in the file is a fabrication even when the surrounding
-  section citation is real.
+- **Never present FlatPPL code you did not copy from the spec as grounded.** This includes
+  code you *assembled* from real spec primitives: if the exact snippet is not copied
+  verbatim from the file, it is not a quote — label it "illustrative — assembled from spec
+  constructs, not a verbatim quote." If you must show invented syntax, label it
+  "illustrative — not from the spec." An example that sounds right but isn't in the file is
+  a fabrication even when the surrounding section citation is real.
 
 **Fallback — no shell or no network.** If Bash, `curl`, or outbound network is
 unavailable (some sandboxed surfaces), use `WebFetch` on the URL with a **narrow,
