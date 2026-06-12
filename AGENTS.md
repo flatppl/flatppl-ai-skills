@@ -13,7 +13,7 @@ across the whole document, with no truncation. Without a shell, fall back to tar
 single-topic web fetches. Quote the relevant section heading and `{#sec:...}` anchor when
 you cite it.
 
-## Two tasks, two guides
+## Three tasks, three guides
 
 - **Answer a question about the language** (syntax, measure algebra, distributions,
   functions, likelihoods/posteriors, FlatPIR, profiles), **or explain what an existing
@@ -21,8 +21,10 @@ you cite it.
   see [`.claude/skills/flatppl-docs/SKILL.md`](.claude/skills/flatppl-docs/SKILL.md).
 - **Write, port, review, fix, or troubleshoot a `.flatppl` model** →
   see [`.claude/skills/flatppl-model/SKILL.md`](.claude/skills/flatppl-model/SKILL.md).
+- **Teach a newcomer the language** with a guided, progressive curriculum →
+  see [`.claude/skills/flatppl-learn/SKILL.md`](.claude/skills/flatppl-learn/SKILL.md).
 
-Both files are written for agents: dense reference, navigation method, and the hard
+All three files are written for agents: dense reference, navigation method, and the hard
 invariants that prevent the most common FlatPPL mistakes. Read the relevant one in
 full before working.
 

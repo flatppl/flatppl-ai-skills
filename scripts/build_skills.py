@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SKILLS_DIR = ROOT / ".claude" / "skills"
 DIST = ROOT / "dist"
-SKILLS = ["flatppl-docs", "flatppl-model"]
+SKILLS = ["flatppl-docs", "flatppl-model", "flatppl-learn"]
 
 EXCLUDE_DIRS = {"__pycache__", "node_modules"}
 EXCLUDE_GLOBS = {"*.pyc"}
