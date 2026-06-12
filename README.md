@@ -24,17 +24,27 @@ specification on demand and cites section headings.
 ### Claude Code — plugin marketplace (recommended)
 
 This repo is a Claude Code plugin marketplace. Add it once, then install the `flatppl`
-plugin (which bundles all three skills):
+plugin (which bundles all three skills).
+
+From the terminal:
 
 ```sh
+claude plugin marketplace add flatppl/flatppl-ai-skills
+claude plugin install flatppl@flatppl-ai-skills
+```
+
+Or with the equivalent slash commands inside a Claude Code session:
+
+```
 /plugin marketplace add flatppl/flatppl-ai-skills
 /plugin install flatppl@flatppl-ai-skills
 ```
 
-It is enabled on installation and available in every project. The footprint is minimal:
-only each skill's one-line description is always loaded, while the full guidance and the
-specification and diagnostics references load on demand when a FlatPPL task fires. Run
-`/plugin marketplace update` to receive updates.
+The plugin is enabled on installation and available in every project. The footprint is
+minimal: only each skill's one-line description is always loaded, while the full guidance
+and the specification and diagnostics references load on demand when a FlatPPL task fires.
+Update later with `claude plugin update flatppl` from the terminal, or
+`/plugin marketplace update` in session.
 
 ### Claude Code — copy install
 

@@ -46,6 +46,20 @@ lookups. It is preferable to per-topic fetching for fidelity, completeness, and 
    sentence for each non-obvious claim. If two keyword greps find nothing, the spec
    **doesn't cover it** — say so plainly; never fill from prior knowledge.
 
+**Grounding contract — applies to every answer.** Hard rules, not advice. They exist
+because a plausible-sounding answer that wasn't pulled from the file is the main failure
+mode here:
+- **Anchors come from grep, never from memory.** Only cite a `{#sec:...}` anchor you have
+  actually seen in `grep -n '{#sec:' /tmp/flatppl-design.md` output. If you did not grep
+  it, you do not have it — do not write it. A made-up anchor that *looks* right (e.g.
+  inventing `{#sec:negbinomial2}` for a distribution) is a fabrication.
+- **Quotes are verbatim.** Copy the spec sentence out of the file; never paraphrase into
+  quotation marks.
+- **Never present FlatPPL code you did not copy from the spec as grounded.** If you must
+  show illustrative syntax, label it "illustrative — not quoted from the spec." An example
+  that sounds right but isn't in the file is a fabrication even when the surrounding
+  section citation is real.
+
 **Fallback — no shell or no network.** If Bash, `curl`, or outbound network is
 unavailable (some sandboxed surfaces), use `WebFetch` on the URL with a **narrow,
 single-topic prompt** naming the target section: *"In the '<Section>' section, what does
