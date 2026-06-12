@@ -34,7 +34,9 @@ document, with fast repeat lookups. Guard on existence so a session downloads at
 
 Then `grep -n '{#sec:' /tmp/flatppl-design.md` to map sections to lines, or
 `grep -n '<construct>'` to jump to a builtin. Cite **section headings**, not line
-numbers. If Bash/`curl`/network is unavailable, fall back to the `flatppl-docs` skill or
+numbers — and only an anchor you actually grepped; never invent a plausible-looking
+`{#sec:...}`. Show only spec-copied code as grounded; label any illustrative snippet as
+illustrative. If Bash/`curl`/network is unavailable, fall back to the `flatppl-docs` skill or
 `WebFetch` directly with narrow single-topic prompts. For general "what does X mean"
 questions, or to **explain what an existing model does** (read-only), use
 `flatppl-docs`. This skill writes, reviews, fixes, and troubleshoots a `.flatppl`

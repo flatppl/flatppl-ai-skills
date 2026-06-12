@@ -149,10 +149,11 @@ print(logp)
 
 ## 6. Structural diff against the closest worked example
 
-Diff the model construct-by-construct against the nearest model in `flatppl-examples/`
-(linear-regression, eight-schools, poisson-model, minimal). Confirm only the intended
-things differ. This is necessary but **not** sufficient — it catches divergence from a
-known-good shape, not a wrong parameterization shared with the example.
+Diff the model construct-by-construct against the nearest model in the spec's **Worked
+examples** section (read whichever models it actually contains — don't assume a specific
+one exists). Confirm only the intended things differ. This is necessary but **not**
+sufficient — it catches divergence from a known-good shape, not a wrong parameterization
+shared with the example.
 
 ## What a clean parse does and does not prove
 
