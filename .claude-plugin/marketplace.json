@@ -6,7 +6,7 @@
     {
       "name": "flatppl",
       "source": "./",
-      "description": "Write FlatPPL models and answer questions about the language, grounded in the public FlatPPL design spec. Bundles the flatppl-docs and flatppl-model skills."
+      "description": "Write FlatPPL models, answer questions about the language, and learn it from a guided curriculum, grounded in the public FlatPPL design spec. Bundles the flatppl-docs, flatppl-model, and flatppl-learn skills."
     }
   ]
 }

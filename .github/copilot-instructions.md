@@ -23,4 +23,5 @@ Core rules:
 Full guidance:
 - Answering language questions, or explaining a model → `.claude/skills/flatppl-docs/SKILL.md`
 - Writing / reviewing / fixing / troubleshooting a `.flatppl` model → `.claude/skills/flatppl-model/SKILL.md`
+- Teaching a newcomer the language with a guided curriculum → `.claude/skills/flatppl-learn/SKILL.md`
 - Catch-all → `AGENTS.md`

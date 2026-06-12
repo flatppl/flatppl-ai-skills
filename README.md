@@ -6,12 +6,13 @@ Skills that teach AI coding agents to **write**, **explain**, **troubleshoot**, 
 loop-free, vectorized probabilistic language — without re-reading the entire design
 specification each session.
 
-The repository provides two skills:
+The repository provides three skills:
 
 | Skill | Task |
 |---|---|
 | **flatppl-docs** | Read-only: answer questions about the language (syntax, value types, measure algebra, distributions, functions, likelihoods/posteriors, FlatPIR, profiles) **and explain what a given `.flatppl` model does**. |
 | **flatppl-model** | Write, draft, port (Stan/PyMC/Turing), review, fix, or **troubleshoot** a `.flatppl` model. |
+| **flatppl-learn** | Teach a newcomer FlatPPL with a **guided, progressive curriculum** — one concept at a time, against the spec and its worked examples. |
 
 Both ground every claim in a single public specification document
 (`https://flatppl.github.io/flatppl-design/flatppl-design.md`); no repository checkout,
@@ -23,7 +24,7 @@ specification on demand and cites section headings.
 ### Claude Code — plugin marketplace (recommended)
 
 This repo is a Claude Code plugin marketplace. Add it once, then install the `flatppl`
-plugin (which bundles both skills):
+plugin (which bundles all three skills):
 
 ```sh
 /plugin marketplace add flatppl/flatppl-ai-skills
@@ -37,11 +38,12 @@ specification and diagnostics references load on demand when a FlatPPL task fire
 
 ### Claude Code — copy install
 
-Or copy the two skill folders into a single project (or `~/.claude` for all projects):
+Or copy the three skill folders into a single project (or `~/.claude` for all projects):
 
 ```sh
 cp -R .claude/skills/flatppl-docs  /path/to/your-repo/.claude/skills/
 cp -R .claude/skills/flatppl-model /path/to/your-repo/.claude/skills/
+cp -R .claude/skills/flatppl-learn /path/to/your-repo/.claude/skills/
 ```
 
 Either way, Claude Code loads each skill's description at session start and reads the
@@ -55,6 +57,7 @@ Claude.ai, the Claude desktop app, or the Claude API:
 ```
 dist/flatppl-docs.skill
 dist/flatppl-model.skill
+dist/flatppl-learn.skill
 ```
 
 To rebuild a bundle after editing a skill, run
@@ -75,13 +78,13 @@ for agents with their own config path; copy whichever you use:
 | Gemini CLI | `GEMINI.md` |
 | Aider | `CONVENTIONS.md` |
 
-Each stub inlines the core rules and points at the two `SKILL.md` files and the spec.
+Each stub inlines the core rules and points at the three `SKILL.md` files and the spec.
 The Cursor and Gemini stubs `@`/path-reference the `SKILL.md` files, so copy
 `.claude/skills/` alongside them for the deep guidance to resolve.
 
 ## How it works
 
-FlatPPL is novel and not in model training sets, so both skills enforce one
+FlatPPL is novel and not in model training sets, so all three skills enforce one
 discipline: **never answer from memory — fetch the spec, quote it, cite the section
 heading.** flatppl-model adds the hard invariants (no loops/`if`, vectorize, `~` vs
 `=`, support constraints, the `lawof`/`kernelof`/`likelihoodof`/`bayesupdate`/`restrict`
@@ -99,11 +102,13 @@ flatppl-ai-skills/
 ├── .cursor/rules/flatppl.mdc             # Cursor entry-point stub (scoped to *.flatppl)
 ├── dist/                                  # prebuilt .skill bundles (Claude apps/API)
 │   ├── flatppl-docs.skill
-│   └── flatppl-model.skill
+│   ├── flatppl-model.skill
+│   └── flatppl-learn.skill
 ├── .claude-plugin/                        # Claude Code plugin marketplace
 │   ├── marketplace.json                  #   catalog: the `flatppl` plugin
 │   └── plugin.json                       #   plugin manifest (skills → .claude/skills/)
 └── .claude/skills/
     ├── flatppl-docs/SKILL.md            # answer language questions
-    └── flatppl-model/SKILL.md           # write / review models
+    ├── flatppl-model/SKILL.md           # write / review models
+    └── flatppl-learn/SKILL.md           # guided curriculum for newcomers
 ```
