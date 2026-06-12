@@ -72,14 +72,30 @@ PRESENCE_LISTS = [
 ]
 
 
+def check_references_identical() -> bool:
+    """The bundled spec-references must stay byte-identical across skills.
+
+    Each skill bundle ships its own copy so it is self-contained, but the copies must not
+    diverge — a fix applied to one (e.g. adding a distribution) would otherwise silently
+    miss the other. Checked offline, before the network fetch. Returns True on drift.
+    """
+    if len({p.read_bytes() for p in REFERENCES}) > 1:
+        rels = ", ".join(str(p.relative_to(ROOT)) for p in REFERENCES)
+        print(f"DRIFT: the bundled spec-references differ from each other ({rels}). "
+              "They must be byte-identical; sync them, then rebuild with 'pixi run build'.")
+        return True
+    print(f"OK: {len(REFERENCES)} spec-references are byte-identical.")
+    return False
+
+
 def main() -> None:
+    drifted = check_references_identical()
     spec = fetch(SPEC_URL)
     spec_dists = spec_distributions(spec)
     if not spec_dists:
         print("ERROR: extracted no distribution names from the spec.", file=sys.stderr)
         sys.exit(2)
 
-    drifted = False
     for ref_path in REFERENCES:
         ref = ref_path.read_text()
         rel = ref_path.relative_to(ROOT)
