@@ -1,5 +1,5 @@
 ---
-name: flatppl-query
+name: flatppl-docs
 description: Answer any question about the FlatPPL probabilistic language — its syntax, value types, measure algebra, distributions, built-in functions, likelihoods/posteriors, FlatPIR, or profiles — and explain what a given .flatppl model does, by consulting the public FlatPPL design spec on the web. Use whenever the user asks how FlatPPL does something, what a FlatPPL construct means, whether FlatPPL supports a feature, or wants a read-only explanation of an existing FlatPPL model, even if they don't name the docs or say "FlatPPL".
 ---
 
