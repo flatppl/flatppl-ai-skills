@@ -34,10 +34,10 @@ document, with fast repeat lookups. Guard on existence so a session downloads at
 
 Then `grep -n '{#sec:' /tmp/flatppl-design.md` to map sections to lines, or
 `grep -n '<construct>'` to jump to a builtin. Cite **section headings**, not line
-numbers. If Bash/`curl`/network is unavailable, fall back to the `flatppl-query` skill or
+numbers. If Bash/`curl`/network is unavailable, fall back to the `flatppl-docs` skill or
 `WebFetch` directly with narrow single-topic prompts. For general "what does X mean"
 questions, or to **explain what an existing model does** (read-only), use
-`flatppl-query`. This skill writes, reviews, fixes, and troubleshoots a `.flatppl`
+`flatppl-docs`. This skill writes, reviews, fixes, and troubleshoots a `.flatppl`
 **model**.
 
 ## Workflow
@@ -48,7 +48,7 @@ questions, or to **explain what an existing model does** (read-only), use
    Copy their shape; don't assume a specific example (e.g. "eight-schools") exists —
    read whichever models the section actually contains.
 2. **Check any construct you're unsure of** against the spec (`grep` the local file, or
-   via `flatppl-query`) — don't guess. For which section a construct lives in and a
+   via `flatppl-docs`) — don't guess. For which section a construct lives in and a
    name-level index of what exists (distributions, sets, functions, measure operators),
    see [`references/spec-reference.md`](references/spec-reference.md), loaded on demand. A
    function absent from "Functions and deterministic operations" may still be a valid

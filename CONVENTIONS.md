@@ -21,6 +21,6 @@ Core rules:
 - Copy the shape of a worked example from the spec; verify every construct first.
 
 Full guidance (read the relevant one in full before working):
-- `.claude/skills/flatppl-query/SKILL.md` — answer language questions, or explain a model
+- `.claude/skills/flatppl-docs/SKILL.md` — answer language questions, or explain a model
 - `.claude/skills/flatppl-model/SKILL.md` — write / review / fix / troubleshoot a `.flatppl` model
 - `AGENTS.md` — catch-all entry point

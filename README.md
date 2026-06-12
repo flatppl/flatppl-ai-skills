@@ -10,7 +10,7 @@ The repository provides two skills:
 
 | Skill | Task |
 |---|---|
-| **flatppl-query** | Read-only: answer questions about the language (syntax, value types, measure algebra, distributions, functions, likelihoods/posteriors, FlatPIR, profiles) **and explain what a given `.flatppl` model does**. |
+| **flatppl-docs** | Read-only: answer questions about the language (syntax, value types, measure algebra, distributions, functions, likelihoods/posteriors, FlatPIR, profiles) **and explain what a given `.flatppl` model does**. |
 | **flatppl-model** | Write, draft, port (Stan/PyMC/Turing), review, fix, or **troubleshoot** a `.flatppl` model. |
 
 Both ground every claim in a single public specification document
@@ -40,7 +40,7 @@ specification and diagnostics references load on demand when a FlatPPL task fire
 Or copy the two skill folders into a single project (or `~/.claude` for all projects):
 
 ```sh
-cp -R .claude/skills/flatppl-query  /path/to/your-repo/.claude/skills/
+cp -R .claude/skills/flatppl-docs  /path/to/your-repo/.claude/skills/
 cp -R .claude/skills/flatppl-model /path/to/your-repo/.claude/skills/
 ```
 
@@ -53,12 +53,12 @@ Prebuilt `.skill` bundles live in [`dist/`](dist/) — upload them as Agent Skil
 Claude.ai, the Claude desktop app, or the Claude API:
 
 ```
-dist/flatppl-query.skill
+dist/flatppl-docs.skill
 dist/flatppl-model.skill
 ```
 
 To rebuild a bundle after editing a skill, run
-`zip -r dist/flatppl-query.skill flatppl-query` from inside `.claude/skills/`, or use
+`zip -r dist/flatppl-docs.skill flatppl-docs` from inside `.claude/skills/`, or use
 skill-creator's `package_skill`.
 
 ### Other agents
@@ -98,12 +98,12 @@ flatppl-ai-skills/
 ├── .github/copilot-instructions.md       # GitHub Copilot entry-point stub
 ├── .cursor/rules/flatppl.mdc             # Cursor entry-point stub (scoped to *.flatppl)
 ├── dist/                                  # prebuilt .skill bundles (Claude apps/API)
-│   ├── flatppl-query.skill
+│   ├── flatppl-docs.skill
 │   └── flatppl-model.skill
 ├── .claude-plugin/                        # Claude Code plugin marketplace
 │   ├── marketplace.json                  #   catalog: the `flatppl` plugin
 │   └── plugin.json                       #   plugin manifest (skills → .claude/skills/)
 └── .claude/skills/
-    ├── flatppl-query/SKILL.md            # answer language questions
+    ├── flatppl-docs/SKILL.md            # answer language questions
     └── flatppl-model/SKILL.md           # write / review models
 ```

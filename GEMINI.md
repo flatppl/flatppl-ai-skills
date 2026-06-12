@@ -24,6 +24,6 @@ Core rules:
   Token names above are illustrative shape, not a guarantee of current spelling.
 
 Full guidance (read the relevant one in full before working):
-- `.claude/skills/flatppl-query/SKILL.md` — answer language questions, or explain a model
+- `.claude/skills/flatppl-docs/SKILL.md` — answer language questions, or explain a model
 - `.claude/skills/flatppl-model/SKILL.md` — write / review / fix / troubleshoot a `.flatppl` model
 - `AGENTS.md` — catch-all entry point

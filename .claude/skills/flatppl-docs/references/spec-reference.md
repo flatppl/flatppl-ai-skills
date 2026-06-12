@@ -84,7 +84,7 @@ multivariate, composite):
 `Bernoulli` `Beta` `BinnedPoissonProcess` `Binomial` `Categorical` `Categorical0`
 `Cauchy` `ChiSquared` `Dirichlet` `Exponential` `Gamma` `GeneralizedNormal` `Geometric`
 `InverseGamma` `InverseWishart` `Laplace` `LKJ` `LKJCholesky` `Logistic` `LogNormal`
-`Multinomial` `MvNormal` `NegativeBinomial` `NegativeBinomial2` `Normal` `Poisson`
+`Multinomial` `MvNormal` `NegativeBinomial` `NegativeBinomial2` `Normal` `Pareto` `Poisson`
 `PoissonProcess` `StudentT` `Uniform` `VonMises` `Weibull` `Wishart`.
 
 **Value sets & parameter domains** — "Value types and data model" + "Language design":

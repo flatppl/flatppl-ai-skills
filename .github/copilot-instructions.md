@@ -21,6 +21,6 @@ Core rules:
   the spec before using it.
 
 Full guidance:
-- Answering language questions, or explaining a model → `.claude/skills/flatppl-query/SKILL.md`
+- Answering language questions, or explaining a model → `.claude/skills/flatppl-docs/SKILL.md`
 - Writing / reviewing / fixing / troubleshooting a `.flatppl` model → `.claude/skills/flatppl-model/SKILL.md`
 - Catch-all → `AGENTS.md`

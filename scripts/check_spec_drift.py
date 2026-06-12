@@ -31,7 +31,7 @@ from pathlib import Path
 SPEC_URL = "https://flatppl.github.io/flatppl-design/flatppl-design.md"
 ROOT = Path(__file__).resolve().parent.parent
 REFERENCES = [
-    ROOT / ".claude/skills/flatppl-query/references/spec-reference.md",
+    ROOT / ".claude/skills/flatppl-docs/references/spec-reference.md",
     ROOT / ".claude/skills/flatppl-model/references/spec-reference.md",
 ]
 

@@ -18,7 +18,7 @@ you cite it.
 - **Answer a question about the language** (syntax, measure algebra, distributions,
   functions, likelihoods/posteriors, FlatPIR, profiles), **or explain what an existing
   model does** (read-only) →
-  see [`.claude/skills/flatppl-query/SKILL.md`](.claude/skills/flatppl-query/SKILL.md).
+  see [`.claude/skills/flatppl-docs/SKILL.md`](.claude/skills/flatppl-docs/SKILL.md).
 - **Write, port, review, fix, or troubleshoot a `.flatppl` model** →
   see [`.claude/skills/flatppl-model/SKILL.md`](.claude/skills/flatppl-model/SKILL.md).
 
