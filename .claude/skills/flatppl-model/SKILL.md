@@ -77,8 +77,10 @@ questions, or to **explain what an existing model does** (read-only), use
   `tau ~ normalize(truncate(Cauchy(0,5), interval(0, inf)))`.
 - **Build reusable functions with `functionof`.** `f = functionof(b)` then `f(x)` —
   when a plain builtin isn't enough.
-- **Comments:** `#` is a plain line comment (`### … ###` block); `%` and `%%% … %%%` are
-  doc-comments that attach to the following binding and survive into FlatPIR. Lead
+- **Comments:** `#` is a plain line comment (`### … ###` block) — discarded by the
+  parser; `%` and `%%% … %%%` are doc-comments that attach to a binding and survive
+  into FlatPIR (a single-line `%` leading or trailing on the same line; a `%%%` block
+  leading only). Lead
   non-trivial files with a `%%% … %%%` doc fence (markdown + LaTeX) — the block-doc-comment
   form in "Syntax" → Documentation.
 

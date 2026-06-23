@@ -19,8 +19,9 @@ grammar and full detail). The language is deliberately lean.
   exactly `name = draw(expr)`. Positional decomposition: `a, b, c = expr` / `a, b ~ expr`,
   `x, y = some_record`, `value, _ = rand(...)`.
 - **Comments** — `#` starts a plain line comment; `### … ###` is a plain block comment
-  (both discarded). **Doc-comments** attach to the following binding and survive into
-  FlatPIR: `% text` (single line) and `%%% … %%%` (block), with an optional markup tag
+  (both discarded). **Doc-comments** attach to a binding and survive into
+  FlatPIR: `% text` (single line, leading or trailing on the binding's line) and
+  `%%% … %%%` (block, leading only), with an optional markup tag
   `%md` (default, Markdown + `$…$` math) or `%typ` (Typst).
 - **Literals** — numbers (`3.14`, `42`, `0xF7`, `1_000_000`, `1.45e7`), strings (`"foo"`),
   booleans (`true` / `false`), arrays (`[1, 2, 3]`), records (`record(a = 1, b = 2)`),

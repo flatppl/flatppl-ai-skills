@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "flatppl",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Skills that teach AI agents to write FlatPPL models and answer questions about the language, grounding every construct in the public FlatPPL design spec.",
   "author": { "name": "FlatPPL", "url": "https://github.com/flatppl" },
   "homepage": "https://flatppl.github.io/flatppl-design/flatppl-design.md",
